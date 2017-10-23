@@ -56,6 +56,28 @@ router.post('/rpm', function(req,res,next){
  
 });
 
+router.get('/rpm', function(req,res,next){
+    var data = {
+        "Data":""
+    };
+    rpm.find({}).then(function(rows){
+        data["Data"] = rows;
+        res.send(data);
+    })
+});
+
+router.get('/rpm/:id', function(req,res,next){
+    var data = {
+        "Data":""
+    };
+    
+    rpm.findById({_id: req.params.id}).then(function(rows){
+        res.send(rows);
+        console.log(rows);
+    });
+    console.log("success");
+});
+
 
 //*********For Diagnostic Trouble Codes*********/
 router.post('/dtc', function(req,res,next){
