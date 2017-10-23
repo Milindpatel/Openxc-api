@@ -7,8 +7,6 @@ const rpmSchema = new Schema({
         type: String,
         required : [true,'rpm field is required']
     }
-    
-
 });
 
 
