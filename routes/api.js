@@ -2,7 +2,10 @@ const express = require('express');
 const router = express.Router();
 const openxc = require('../models/register');
 const rpm = require('../models/rpm');
-const dtc = require('../models/dtc');        
+const dtc = require('../models/dtc');
+const readiness = require('../models/readiness');
+const freezeFrame = require('../models/freezeFrame');
+const engineCodes = require('../models/engineCodes');        
 
 //*********For Registretion *********/
 router.get('/register', function(req,res,next){
@@ -114,5 +117,35 @@ router.get('/dtc/:id', function(req,res,next){
     });
     console.log("success");
 });
+
+
+//*********For Readiness Codes*********/
+router.post('/read', function(req,res,next){
+    dtc.create(req.body).then(function(rows){
+    res
+        .status(200)
+        .send(rows);
+    console.log("success");
+  }).catch(next);
+    
+});
+
+router.get('/dtc', function(req,res,next){
+    var data = {
+        "Data":""
+    };
+    dtc.find({}).then(function(rows){
+        data["Data"] = rows;
+        res
+            .status(200)
+            .send(data);
+        console.log("success");
+    })
+});
+
+
+
+
+
 
 module.exports = router;
