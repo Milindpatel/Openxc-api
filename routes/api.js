@@ -121,7 +121,7 @@ router.get('/dtc/:id', function(req,res,next){
 
 //*********For Readiness Codes*********/
 router.post('/read', function(req,res,next){
-    dtc.create(req.body).then(function(rows){
+    readiness.create(req.body).then(function(rows){
     res
         .status(200)
         .send(rows);
@@ -130,11 +130,11 @@ router.post('/read', function(req,res,next){
     
 });
 
-router.get('/dtc', function(req,res,next){
+router.get('/read', function(req,res,next){
     var data = {
         "Data":""
     };
-    dtc.find({}).then(function(rows){
+    readiness.find({}).then(function(rows){
         data["Data"] = rows;
         res
             .status(200)
@@ -142,6 +142,62 @@ router.get('/dtc', function(req,res,next){
         console.log("success");
     })
 });
+
+
+//*********For engine codes*********/
+router.post('/e_codes', function(req,res,next){
+    engineCodes.create(req.body).then(function(rows){
+    res
+        .status(200)
+        .send(rows);
+    console.log("success");
+  }).catch(next);
+    
+});
+
+router.get('/e_codes', function(req,res,next){
+    var data = {
+        "Data":""
+    };
+    engineCodes.find({}).then(function(rows){
+        data["Data"] = rows;
+        res
+            .status(200)
+            .send(data);
+        console.log("success");
+    })
+});
+
+
+//*********For Freeze Frame*********/
+router.post('/freeze_frame', function(req,res,next){
+    freezeFrame.create(req.body).then(function(rows){
+    res
+        .status(200)
+        .send(rows);
+    console.log("success");
+  }).catch(next);
+    
+});
+
+router.get('/freeze_frame', function(req,res,next){
+    var data = {
+        "Data":""
+    };
+    freezeFrame.find({}).then(function(rows){
+        data["Data"] = rows;
+        res
+            .status(200)
+            .send(data);
+        console.log("success");
+    })
+});
+
+
+
+
+
+
 
 
 
