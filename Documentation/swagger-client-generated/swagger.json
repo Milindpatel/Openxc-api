@@ -8,6 +8,8 @@
       "email" : "milindpatel4416@gmail.com"
     }
   },
+  "host" : "localhost:3000",
+  "basePath" : "/api",
   "tags" : [ {
     "name" : "register",
     "description" : "Access user information from database"
@@ -18,14 +20,16 @@
     "name" : "Diagnostic Trouble Codes",
     "description" : "Access all dtc data from database"
   } ],
+  "schemes" : [ "https" ],
   "paths" : {
     "/register" : {
       "get" : {
         "tags" : [ "register" ],
         "summary" : "searches user information",
-        "operationId" : "searchUser",
         "description" : "you can search for\navailable user information in the system\n",
+        "operationId" : "searchUser",
         "produces" : [ "application/json" ],
+        "parameters" : [ ],
         "responses" : {
           "200" : {
             "description" : "search results matching criteria",
@@ -44,14 +48,15 @@
       "post" : {
         "tags" : [ "register" ],
         "summary" : "adds an user information during registration",
-        "operationId" : "addUser",
         "description" : "Adds user information to the system",
+        "operationId" : "addUser",
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
           "in" : "body",
           "name" : "user Information",
           "description" : "user information to add",
+          "required" : false,
           "schema" : {
             "$ref" : "#/definitions/register"
           }
@@ -79,8 +84,8 @@
       "get" : {
         "tags" : [ "register" ],
         "summary" : "searches user information",
-        "operationId" : "searchUserId",
         "description" : "you can search for\navailable user information by id in the system\n",
+        "operationId" : "searchUserId",
         "produces" : [ "application/json" ],
         "parameters" : [ {
           "name" : "id",
@@ -108,9 +113,10 @@
       "get" : {
         "tags" : [ "rpm" ],
         "summary" : "searches rpm information",
-        "operationId" : "searchRpm",
         "description" : "you can search for\navailable rpm information in the system\n",
+        "operationId" : "searchRpm",
         "produces" : [ "application/json" ],
+        "parameters" : [ ],
         "responses" : {
           "200" : {
             "description" : "search results matching criteria",
@@ -129,14 +135,15 @@
       "post" : {
         "tags" : [ "rpm" ],
         "summary" : "adds an rpm data into system from the vehicle",
-        "operationId" : "addRpm",
         "description" : "Adds rpm data to the system",
+        "operationId" : "addRpm",
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
           "in" : "body",
           "name" : "RPM Data",
           "description" : "RPM data to add",
+          "required" : false,
           "schema" : {
             "$ref" : "#/definitions/rpm"
           }
@@ -164,8 +171,8 @@
       "get" : {
         "tags" : [ "rpm" ],
         "summary" : "searches RPM data through id",
-        "operationId" : "searchRpmId",
         "description" : "you can search for\navailable rpm information by id in the system\n",
+        "operationId" : "searchRpmId",
         "produces" : [ "application/json" ],
         "parameters" : [ {
           "name" : "id",
@@ -193,9 +200,10 @@
       "get" : {
         "tags" : [ "Diagnostic Trouble Codes" ],
         "summary" : "searches Diagnostic Trouble Codes information",
-        "operationId" : "searchDtc",
         "description" : "you can search for\navailable Diagnostic Trouble Codes information in the system\n",
+        "operationId" : "searchDtc",
         "produces" : [ "application/json" ],
+        "parameters" : [ ],
         "responses" : {
           "200" : {
             "description" : "search results matching criteria",
@@ -214,14 +222,15 @@
       "post" : {
         "tags" : [ "Diagnostic Trouble Codes" ],
         "summary" : "adds an Diagnostic Trouble Codes information into system from the vehicle",
-        "operationId" : "addDtc",
         "description" : "Adds rpm data to the system",
+        "operationId" : "addDtc",
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
           "in" : "body",
           "name" : "Diagnostic Trouble Codes information",
           "description" : "Diagnostic Trouble Codes information to add",
+          "required" : false,
           "schema" : {
             "$ref" : "#/definitions/dtc"
           }
@@ -249,8 +258,8 @@
       "get" : {
         "tags" : [ "Diagnostic Trouble Codes" ],
         "summary" : "searches Diagnostic Trouble Codes information through id",
-        "operationId" : "searchDtcId",
         "description" : "you can search for\navailable Diagnostic Trouble Codes information by id in the system\n",
+        "operationId" : "searchDtcId",
         "produces" : [ "application/json" ],
         "parameters" : [ {
           "name" : "id",
@@ -273,12 +282,186 @@
           }
         }
       }
+    },
+    "/read" : {
+      "get" : {
+        "tags" : [ "Readiness Codes" ],
+        "summary" : "searches Readiness Codes information",
+        "description" : "you can search for\navailable Readiness Codes information in the system\n",
+        "operationId" : "searchReadinessCodes",
+        "produces" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "search results matching criteria",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/readiness"
+              }
+            }
+          },
+          "400" : {
+            "description" : "bad input parameter"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Readiness Codes" ],
+        "summary" : "adds an Readiness Codes information into system from the vehicle",
+        "description" : "Adds Readiness Codes data to the system",
+        "operationId" : "addReadinessCodes",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "Readiness Codes information",
+          "description" : "Readiness Codes information to add",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/readiness"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "item created",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/readiness"
+              }
+            }
+          },
+          "400" : {
+            "description" : "invalid input, object invalid"
+          },
+          "409" : {
+            "description" : "an existing item already exists"
+          }
+        }
+      }
+    },
+    "/e_codes" : {
+      "get" : {
+        "tags" : [ "engine codes" ],
+        "summary" : "searches engine codes information",
+        "description" : "you can search for\navailable engine codes information in the system\n",
+        "operationId" : "searchEngineCodes",
+        "produces" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "search results matching criteria",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/ecode"
+              }
+            }
+          },
+          "400" : {
+            "description" : "bad input parameter"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "engine codes" ],
+        "summary" : "adds an engine codes information into system from the vehicle",
+        "description" : "Adds engine codes data to the system",
+        "operationId" : "addEngineCodes",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "engine codes information",
+          "description" : "engine codes information to add",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/ecode"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "item created",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/ecode"
+              }
+            }
+          },
+          "400" : {
+            "description" : "invalid input, object invalid"
+          },
+          "409" : {
+            "description" : "an existing item already exists"
+          }
+        }
+      }
+    },
+    "/freeze_frame" : {
+      "get" : {
+        "tags" : [ "Freeze Frame Information" ],
+        "summary" : "searches Freeze Frame information",
+        "description" : "you can search for\navailable Freeze Frame information in the system\n",
+        "operationId" : "searchFreezeFrame",
+        "produces" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "search results matching criteria",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/freezeframe"
+              }
+            }
+          },
+          "400" : {
+            "description" : "bad input parameter"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Freeze Frame Information" ],
+        "summary" : "adds a Freeze Frame information into system from the vehicle",
+        "description" : "Adds Freeze Frame data to the system",
+        "operationId" : "addFreezeFrame",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "Freeze Frame information",
+          "description" : "Freeze Frame information to add",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/freezeframe"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "item created",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/freezeframe"
+              }
+            }
+          },
+          "400" : {
+            "description" : "invalid input, object invalid"
+          },
+          "409" : {
+            "description" : "an existing item already exists"
+          }
+        }
+      }
     }
   },
   "definitions" : {
     "register" : {
       "type" : "object",
-      "required" : [ "username", "email", "password", "phone", "vin", "gcm" ],
+      "required" : [ "email", "gcm", "password", "phone", "username", "vin" ],
       "properties" : {
         "username" : {
           "type" : "string",
@@ -312,13 +495,13 @@
       "properties" : {
         "rpm" : {
           "type" : "string",
-          "example" : 12000
+          "example" : "12000"
         }
       }
     },
     "dtc" : {
       "type" : "object",
-      "required" : [ "code", "system", "manufacturer" ],
+      "required" : [ "code", "manufacturer", "system" ],
       "properties" : {
         "code" : {
           "type" : "string",
@@ -333,9 +516,52 @@
           "example" : "manufacturer 123"
         }
       }
+    },
+    "freezeframe" : {
+      "type" : "object",
+      "required" : [ "description", "pid", "value" ],
+      "properties" : {
+        "pid" : {
+          "type" : "string",
+          "example" : "pid 123"
+        },
+        "description" : {
+          "type" : "string",
+          "example" : "description 123"
+        },
+        "value" : {
+          "type" : "string",
+          "example" : "value 123"
+        }
+      }
+    },
+    "readiness" : {
+      "type" : "object",
+      "required" : [ "monitor_des", "status_driving_cycle", "status_dtc_clr" ],
+      "properties" : {
+        "monitor_des" : {
+          "type" : "string",
+          "example" : "monitor_des 123"
+        },
+        "status_dtc_clr" : {
+          "type" : "string",
+          "example" : "status_dtc_clr 123"
+        },
+        "status_driving_cycle" : {
+          "type" : "string",
+          "example" : "status_driving_cycle 123"
+        }
+      }
+    },
+    "ecode" : {
+      "type" : "object",
+      "required" : [ "ecode" ],
+      "properties" : {
+        "ecode" : {
+          "type" : "string",
+          "example" : "ecode 123"
+        }
+      }
     }
-  },
-  "host" : "localhost:3000",
-  "basePath" : "/api",
-  "schemes" : [ "https" ]
+  }
 }

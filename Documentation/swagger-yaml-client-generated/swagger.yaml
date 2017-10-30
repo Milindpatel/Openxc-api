@@ -1,0 +1,470 @@
+---
+swagger: "2.0"
+info:
+  description: "This is a simple API for OpenXc"
+  version: "1.0.0"
+  title: "Simple OpenXc API"
+  contact:
+    email: "milindpatel4416@gmail.com"
+host: "localhost:3000"
+basePath: "/api"
+tags:
+- name: "register"
+  description: "Access user information from database"
+- name: "rpm"
+  description: "Access all rpm data from database"
+- name: "Diagnostic Trouble Codes"
+  description: "Access all dtc data from database"
+schemes:
+- "https"
+paths:
+  /register:
+    get:
+      tags:
+      - "register"
+      summary: "searches user information"
+      description: "you can search for\navailable user information in the system\n"
+      operationId: "searchUser"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "search results matching criteria"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/register"
+        400:
+          description: "bad input parameter"
+    post:
+      tags:
+      - "register"
+      summary: "adds an user information during registration"
+      description: "Adds user information to the system"
+      operationId: "addUser"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "user Information"
+        description: "user information to add"
+        required: false
+        schema:
+          $ref: "#/definitions/register"
+      responses:
+        201:
+          description: "item created"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/register"
+        400:
+          description: "invalid input, object invalid"
+        409:
+          description: "an existing item already exists"
+  /register/{id}:
+    get:
+      tags:
+      - "register"
+      summary: "searches user information"
+      description: "you can search for\navailable user information by id in the system\n"
+      operationId: "searchUserId"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "search results matching criteria"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/register"
+        400:
+          description: "bad input"
+  /rpm:
+    get:
+      tags:
+      - "rpm"
+      summary: "searches rpm information"
+      description: "you can search for\navailable rpm information in the system\n"
+      operationId: "searchRpm"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "search results matching criteria"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/rpm"
+        400:
+          description: "bad input parameter"
+    post:
+      tags:
+      - "rpm"
+      summary: "adds an rpm data into system from the vehicle"
+      description: "Adds rpm data to the system"
+      operationId: "addRpm"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "RPM Data"
+        description: "RPM data to add"
+        required: false
+        schema:
+          $ref: "#/definitions/rpm"
+      responses:
+        201:
+          description: "item created"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/rpm"
+        400:
+          description: "invalid input, object invalid"
+        409:
+          description: "an existing item already exists"
+  /rpm/{id}:
+    get:
+      tags:
+      - "rpm"
+      summary: "searches RPM data through id"
+      description: "you can search for\navailable rpm information by id in the system\n"
+      operationId: "searchRpmId"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "search results matching criteria"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/rpm"
+        400:
+          description: "bad input parameter"
+  /dtc:
+    get:
+      tags:
+      - "Diagnostic Trouble Codes"
+      summary: "searches Diagnostic Trouble Codes information"
+      description: "you can search for\navailable Diagnostic Trouble Codes information\
+        \ in the system\n"
+      operationId: "searchDtc"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "search results matching criteria"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/dtc"
+        400:
+          description: "bad input parameter"
+    post:
+      tags:
+      - "Diagnostic Trouble Codes"
+      summary: "adds an Diagnostic Trouble Codes information into system from the\
+        \ vehicle"
+      description: "Adds rpm data to the system"
+      operationId: "addDtc"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "Diagnostic Trouble Codes information"
+        description: "Diagnostic Trouble Codes information to add"
+        required: false
+        schema:
+          $ref: "#/definitions/dtc"
+      responses:
+        201:
+          description: "item created"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/dtc"
+        400:
+          description: "invalid input, object invalid"
+        409:
+          description: "an existing item already exists"
+  /dtc/{id}:
+    get:
+      tags:
+      - "Diagnostic Trouble Codes"
+      summary: "searches Diagnostic Trouble Codes information through id"
+      description: "you can search for\navailable Diagnostic Trouble Codes information\
+        \ by id in the system\n"
+      operationId: "searchDtcId"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "search results matching criteria"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/dtc"
+        400:
+          description: "bad input parameter"
+  /read:
+    get:
+      tags:
+      - "Readiness Codes"
+      summary: "searches Readiness Codes information"
+      description: "you can search for\navailable Readiness Codes information in the\
+        \ system\n"
+      operationId: "searchReadinessCodes"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "search results matching criteria"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/readiness"
+        400:
+          description: "bad input parameter"
+    post:
+      tags:
+      - "Readiness Codes"
+      summary: "adds an Readiness Codes information into system from the vehicle"
+      description: "Adds Readiness Codes data to the system"
+      operationId: "addReadinessCodes"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "Readiness Codes information"
+        description: "Readiness Codes information to add"
+        required: false
+        schema:
+          $ref: "#/definitions/readiness"
+      responses:
+        201:
+          description: "item created"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/readiness"
+        400:
+          description: "invalid input, object invalid"
+        409:
+          description: "an existing item already exists"
+  /e_codes:
+    get:
+      tags:
+      - "engine codes"
+      summary: "searches engine codes information"
+      description: "you can search for\navailable engine codes information in the\
+        \ system\n"
+      operationId: "searchEngineCodes"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "search results matching criteria"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ecode"
+        400:
+          description: "bad input parameter"
+    post:
+      tags:
+      - "engine codes"
+      summary: "adds an engine codes information into system from the vehicle"
+      description: "Adds engine codes data to the system"
+      operationId: "addEngineCodes"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "engine codes information"
+        description: "engine codes information to add"
+        required: false
+        schema:
+          $ref: "#/definitions/ecode"
+      responses:
+        201:
+          description: "item created"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ecode"
+        400:
+          description: "invalid input, object invalid"
+        409:
+          description: "an existing item already exists"
+  /freeze_frame:
+    get:
+      tags:
+      - "Freeze Frame Information"
+      summary: "searches Freeze Frame information"
+      description: "you can search for\navailable Freeze Frame information in the\
+        \ system\n"
+      operationId: "searchFreezeFrame"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "search results matching criteria"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/freezeframe"
+        400:
+          description: "bad input parameter"
+    post:
+      tags:
+      - "Freeze Frame Information"
+      summary: "adds a Freeze Frame information into system from the vehicle"
+      description: "Adds Freeze Frame data to the system"
+      operationId: "addFreezeFrame"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "Freeze Frame information"
+        description: "Freeze Frame information to add"
+        required: false
+        schema:
+          $ref: "#/definitions/freezeframe"
+      responses:
+        201:
+          description: "item created"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/freezeframe"
+        400:
+          description: "invalid input, object invalid"
+        409:
+          description: "an existing item already exists"
+definitions:
+  register:
+    type: "object"
+    required:
+    - "email"
+    - "gcm"
+    - "password"
+    - "phone"
+    - "username"
+    - "vin"
+    properties:
+      username:
+        type: "string"
+        example: "Milind Patel"
+      email:
+        type: "string"
+        example: "milindpatel4416@gmail.com"
+      password:
+        type: "string"
+        example: "openxc123"
+      phone:
+        type: "string"
+        example: "647-273-1722"
+      vin:
+        type: "string"
+        example: "anjnvadfl123(it comes from vehicle)"
+      gcm:
+        type: "string"
+        example: "hsahfshdofsofs(it comes from android part)"
+  rpm:
+    type: "object"
+    required:
+    - "rpm"
+    properties:
+      rpm:
+        type: "string"
+        example: "12000"
+  dtc:
+    type: "object"
+    required:
+    - "code"
+    - "manufacturer"
+    - "system"
+    properties:
+      code:
+        type: "string"
+        example: "code 123"
+      system:
+        type: "string"
+        example: "system 123"
+      manufacturer:
+        type: "string"
+        example: "manufacturer 123"
+  freezeframe:
+    type: "object"
+    required:
+    - "description"
+    - "pid"
+    - "value"
+    properties:
+      pid:
+        type: "string"
+        example: "pid 123"
+      description:
+        type: "string"
+        example: "description 123"
+      value:
+        type: "string"
+        example: "value 123"
+  readiness:
+    type: "object"
+    required:
+    - "monitor_des"
+    - "status_driving_cycle"
+    - "status_dtc_clr"
+    properties:
+      monitor_des:
+        type: "string"
+        example: "monitor_des 123"
+      status_dtc_clr:
+        type: "string"
+        example: "status_dtc_clr 123"
+      status_driving_cycle:
+        type: "string"
+        example: "status_driving_cycle 123"
+  ecode:
+    type: "object"
+    required:
+    - "ecode"
+    properties:
+      ecode:
+        type: "string"
+        example: "ecode 123"
