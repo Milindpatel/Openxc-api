@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const openxc = require('../models/register');
+const user = require('../models/user');
 const rpm = require('../models/rpm');
 const dtc = require('../models/dtc');
 const readiness = require('../models/readiness');
@@ -12,14 +12,15 @@ router.get('/register', function(req,res,next){
     var data = {
         "Data":""
     };
-    openxc.find({}).then(function(rows){
+    user.find({}).then(function(rows){
         data["Data"] = rows;
-        res.send(data);
+        res.send(rows);
+        console.log(rows)
     })
 });
 
 router.post('/register', function(req,res,next){
-    openxc.create(req.body).then(function(rows){
+    user.create(req.body).then(function(rows){
     res
         .status(200)
         .send(rows);
@@ -30,7 +31,7 @@ router.post('/register', function(req,res,next){
 
 //update a register in database
 router.put('/register/:id', function(req,res,next){
-    openxc.findByIdAndUpdate({_id:req.params.id}, req.body).then(function(){
+    user.findByIdAndUpdate({_id:req.params.id}, req.body).then(function(){
         openxc.findOne({_id:req.params.id}).then(function(rows){
 
             res.send(rows);
@@ -40,7 +41,7 @@ router.put('/register/:id', function(req,res,next){
 
 //delete a register from database
 router.delete('/register/:id', function(req,res,next){
-    openxc.findByIdAndRemove({_id: req.params.id}).then(function(rows){
+    user.findByIdAndRemove({_id: req.params.id}).then(function(rows){
         res.send(rows);
     });
     // res.send({type : 'DELETE'});
