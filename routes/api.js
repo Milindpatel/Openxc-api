@@ -1,51 +1,53 @@
 const express = require('express');
 const router = express.Router();
-const user = require('../models/user');
+const User = require('../models/user');
 const rpm = require('../models/rpm');
 const dtc = require('../models/dtc');
 const readiness = require('../models/readiness');
 const freezeFrame = require('../models/freezeFrame');
-const engineCodes = require('../models/engineCodes');        
+const engineCodes = require('../models/engineCodes');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;        
 
 //*********For Registretion *********/
-router.get('/register', function(req,res,next){
-    var data = {
-        "Data":""
-    };
-    user.find({}).then(function(rows){
-        data["Data"] = rows;
-        res.send(rows);
-        console.log(rows)
-    })
-});
+// router.get('/register', function(req,res,next){
+//     var data = {
+//         "Data":""
+//     };
+//     user.find({}).then(function(rows){
+//         data["Data"] = rows;
+//         res.send(rows);
+//         console.log(rows)
+//     })
+// });
 
-router.post('/register', function(req,res,next){
-    user.create(req.body).then(function(rows){
-    res
-        .status(200)
-        .send(rows);
-    console.log("success");
-  }).catch(next);
+// router.post('/register', function(req,res,next){
+//     user.create(req.body).then(function(rows){
+//     res
+//         .status(200)
+//         .send(rows);
+//     console.log("success");
+//   }).catch(next);
     
-});
+// });
 
-//update a register in database
-router.put('/register/:id', function(req,res,next){
-    user.findByIdAndUpdate({_id:req.params.id}, req.body).then(function(){
-        openxc.findOne({_id:req.params.id}).then(function(rows){
+// //update a register in database
+// router.put('/register/:id', function(req,res,next){
+//     user.findByIdAndUpdate({_id:req.params.id}, req.body).then(function(){
+//         user.findOne({_id:req.params.id}).then(function(rows){
 
-            res.send(rows);
-        });
-    });
-});
+//             res.send(rows);
+//         });
+//     });
+// });
 
-//delete a register from database
-router.delete('/register/:id', function(req,res,next){
-    user.findByIdAndRemove({_id: req.params.id}).then(function(rows){
-        res.send(rows);
-    });
-    // res.send({type : 'DELETE'});
-});
+// //delete a register from database
+// router.delete('/register/:id', function(req,res,next){
+//     user.findByIdAndRemove({_id: req.params.id}).then(function(rows){
+//         res.send(rows);
+//     });
+//     // res.send({type : 'DELETE'});
+// });
 
 
 //*********For RPM *********/
