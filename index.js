@@ -20,25 +20,10 @@ var users = require('./routes/users');
 // Init App
 var app = express();
 
-// View Engine
-app.set('views', path.join(__dirname, 'views'));
-app.engine('handlebars', exphbs({defaultLayout:'layout'}));
-app.set('view engine', 'handlebars');
-
 // BodyParser Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-
-// Set Static Folder
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Express Session
-app.use(session({
-    secret: 'secret',
-    saveUninitialized: true,
-    resave: true
-}));
 
 // Passport init
 app.use(passport.initialize());
@@ -72,14 +57,14 @@ app.use('/api/users', users);
 // Set Port
 app.set('port', (process.env.PORT || 3000));
 
+//port listening
 app.listen(app.get('port'), function(){
-	console.log('Server started on port '+app.get('port'));
+	console.log('Server started on port ' + app.get('port'));
 });
 
-
-
+//error handler
 app.use(function(err,req,res,next){
-    // console.log(err);
+    console.log(err);
     res
         .status(422)
         .send({error : err.message});

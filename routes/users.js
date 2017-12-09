@@ -5,12 +5,8 @@ var LocalStrategy = require('passport-local').Strategy;
 
 var User = require('../models/user');
 
-//Register
-// router.get('/register', function(req, res){
-//     res.render('register');
-// });
 
-router.get('/register', function(req,res,next){
+router.get('/registered', function(req,res,next){
         var data = {
             "Data":""
         };
@@ -43,7 +39,7 @@ router.post('/register', function(req, res){
     req.checkBody('email', 'Email is not valid').isEmail();
     req.checkBody('username', 'UserName is required').notEmpty();
     req.checkBody('password', 'Password is required').notEmpty();
-    req.checkBody('password2', 'Password2 is required').equals(req.body.password);
+    req.checkBody('password2', 'Password2 should be equal to above password').equals(req.body.password);
     req.checkBody('phone', 'Phone is required').notEmpty();
     req.checkBody('vin', 'vin is required').notEmpty();
     req.checkBody('gcm', 'gcm is required').notEmpty();
@@ -71,7 +67,7 @@ router.post('/register', function(req, res){
         req.flash('success_msg', 'You are registered and can now login');
 
         // res.redirect('login');
-        res.send("success register1");
+        res.send("successfully register " + name);
     }
 });
 
@@ -112,15 +108,24 @@ passport.use(new LocalStrategy(
     // {successRedirect: '/', failureRedirect: '/users/login', failureFlash: true}),
     function(req, res) {
         // res.redirect('/');
-        res.send("success login");
+        res.send("successfull login");
     });
 
 
     router.get('/logout',function(req,res){
         req.logOut();
-        req.flash('success_msg', 'You are logged out');
-        res.redirect('/users/login');
+        // req.flash('success_msg', 'You are logged out');
+        // res.redirect('/users/login');
     });
+
+    router.put('/register/:id', function(req,res,next){
+    
+        user.findOne({_id:req.params.id}).then(function(rows){
+
+            
+        });
+    
+});
  
 
 module.exports = router;
